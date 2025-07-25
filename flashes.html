@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashes - Raam's Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css?v=1">
+    <style>
+        #video-player {
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            height: 360px;
+        }
+
+        #video-player video {
+            scroll-snap-align: start;
+            margin-bottom: 1rem;
+        }
+
+        #video-uploads {
+            margin-bottom: 1rem;
+        }
+        .video-container {
+            display: flex; /* Enable flexbox for alignment */
+            align-items: center; /* Vertically align items */
+            margin-bottom: 1rem; /* Add some spacing between videos */
+        }
+        .video-title {
+            margin-left: 1rem; /* Add some space between video and title */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300 font-sans">
+    <header class="py-4 px-8 md:px-16 lg:px-24 bg-gray-800">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Raam's Network</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="index.html" class="hover:text-white">Home</a></li>
+                    <li><a href="about.html" class="hover:text-white">About</a></li>
+                    <li><a href="portfolio.html" class="hover:text-white">Portfolio</a></li>
+                    <li><a href="blog.html" class="hover:text-white">Blog</a></li>
+                    <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-8 px-8 md:px-16 lg:px-24">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold mb-4">Flashes</h1>
+
+            <div id="video-uploads" class="mb-8">
+                <input type="file" id="video-input" multiple accept="video/*" class="mb-4">
+                <button id="add-video-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Video</button>
+            </div>
+
+            <div id="video-player">
+                <div class="video-container">
+                    <video controls width="640" height="360" class="mb-4">
+                        <source src="placeholder-video1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span class="video-title">Placeholder Video 1</span> <button class="delete-button bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2" data-videourl="placeholder-video1.mp4">Delete</button>
+                </div>
+                <div class="video-container">
+                    <video controls width="640" height="360" class="mb-4">
+                        <source src="placeholder-video2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span class="video-title">Placeholder Video 2</span> <button class="delete-button bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2" data-videourl="placeholder-video2.mp4">Delete</button>
+                </div>
+                <div class="video-container">
+                    <video controls width="640" height="360" class="mb-4">
+                        <source src="placeholder-video3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span class="video-title">Placeholder Video 3</span> <button class="delete-button bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2" data-videourl="placeholder-video3.mp4">Delete</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-4 px-8 md:px-16 lg:px-24 bg-gray-800 text-center">
+        <div class="container mx-auto">
+            <p>&copy; 2025 Raam's Network. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const videoInput = document.getElementById('video-input');
+        const addVideoButton = document.getElementById('add-video-button');
+        const videoPlayer = document.getElementById('video-player');
+
+        addVideoButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            const files = videoInput.files;
+
+            if (files.length > 0) {
+                for (const file of files) {
+                    if (file.type.startsWith('video/')) {
+                        const videoUrl = URL.createObjectURL(file);
+                        const videoElement = document.createElement('video');
+                        videoElement.src = videoUrl;
+                        videoElement.controls = true;
+                        videoElement.width = 640;
+                        videoElement.height = 360;
+                        videoElement.classList.add('mb-4');
+
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.classList.add('bg-red-500', 'hover:bg-red-700', 'text-white', 'font-bold', 'py-1', 'px-2', 'rounded', 'ml-2');
+                        deleteButton.addEventListener('click', () => {
+                            videoPlayer.removeChild(videoElement.parentNode); // Remove the container
+                            URL.revokeObjectURL(videoUrl); // Release the object URL
+                        });
+
+                        const videoTitle = document.createElement('span');
+                        videoTitle.textContent = file.name; // Use filename as title
+                        videoTitle.classList.add('video-title');
+
+                        const videoContainer = document.createElement('div');
+                        videoContainer.classList.add('video-container'); // Use consistent class name
+                        videoContainer.appendChild(videoElement);
+                        videoContainer.appendChild(videoTitle);
+                        videoContainer.appendChild(deleteButton);
+
+
+                        videoPlayer.appendChild(videoContainer);
+                    }
+                }
+            }
+        });
+
+        // Add delete functionality to initial videos and titles
+        const initialVideos = videoPlayer.querySelectorAll('video');
+        initialVideos.forEach(video => {
+            const deleteButton = video.nextElementSibling.nextElementSibling; // Get the sibling delete button
+            deleteButton.addEventListener('click', () => {
+                videoPlayer.removeChild(video.parentNode); // Remove the container
+            });
+        });
+
+    </script>
+
+</body>
+</html>

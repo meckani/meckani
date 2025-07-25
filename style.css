@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-gray-900 text-gray-300 font-sans; /* Dark Mode Only */
+}
+
+h2 {
+    @apply text-3xl font-bold mb-4 hover:text-white;
+}
+
+.container {
+    @apply mx-auto py-8 px-8 md:px-16 lg:px-24;
+}
+
+section div {
+    @apply bg-gray-700 rounded-lg py-8 px-8;
+}
+
+input[type="search"] {
+    @apply w-full rounded-md p-2 mb-4 bg-gray-800 text-gray-300;
+}
+
+footer {
+    @apply py-4 px-8 md:px-16 lg:px-24 bg-gray-800 text-center;
+}
+
+nav ul li a {
+    @apply hover:text-white;
+}
+
+header {
+    @apply py-4 px-8 md:px-16 lg:px-24 bg-gray-800;
+}
+
+main {
+    @apply py-8 px-8 md:px-16 lg:px-24;
+}
