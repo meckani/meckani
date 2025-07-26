@@ -76,11 +76,16 @@ body {
   transform: scale(1.15);
 }
 
-/* Website Name Image */
+/* Website Name Image - Alignment adjustment */
 .website-name {
   display: flex;
   align-items: center;
-  margin: 0 1.5rem;
+  margin: 0 auto; /* Center horizontally */
+  position: absolute;
+  left: 50%;
+  transform: translateX(calc(-50% + 80px)); /* Shifted 80px to the right */
+  top: 50%;
+  transform: translate(calc(-50% + 80px), -50%); /* Combined transform */
 }
 
 .title-logo {
@@ -133,6 +138,7 @@ body {
   display: flex;
   gap: 1.5rem;
   transition: transform 0.4s ease;
+  margin-left: auto; /* Push to the right */
 }
 
 .nav-links a {
@@ -395,6 +401,27 @@ footer {
   z-index: 2;
 }
 
+/* Spark animation elements */
+.spark-dot {
+  opacity: 0.8;
+  animation: sparkle 1.5s infinite alternate;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0.3;
+    r: 2;
+  }
+  50% {
+    opacity: 1;
+    r: 4;
+  }
+  100% {
+    opacity: 0.3;
+    r: 2;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .card-grid {
@@ -413,12 +440,9 @@ footer {
     font-size: 1.2rem;
   }
   
+  /* Adjust alignment for tablet */
   .website-name {
-    margin: 0 1rem;
-  }
-  
-  .title-logo {
-    height: 40px;
+    transform: translate(calc(-50% + 60px), -50%);
   }
 }
 
@@ -491,12 +515,11 @@ footer {
     font-size: 3rem;
   }
   
+  /* Reset alignment for mobile */
   .website-name {
-    margin: 0 0.5rem;
-  }
-  
-  .title-logo {
-    height: 35px;
+    position: static;
+    transform: none;
+    margin: 1rem auto;
   }
 }
 
@@ -534,6 +557,6 @@ footer {
   }
   
   .title-logo {
-    height: 30px;
+    height: 50px;
   }
 }
