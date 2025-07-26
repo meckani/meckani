@@ -35,7 +35,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
+  height: 6px;
   background: transparent;
   z-index: 1000;
 }
@@ -43,7 +43,7 @@ body {
 .progress-bar {
   height: 100%;
   width: 0;
-  background: linear-gradient(90deg, var(--accent-color), #819499);
+  background: linear-gradient(90deg, var(--accent-color), #00c9d1);
   transition: width 0.2s ease-out;
   border-radius: 0 3px 3px 0;
 }
@@ -58,6 +58,7 @@ body {
   border-bottom: 1px solid rgba(0,173,181,0.1);
   position: relative;
   z-index: 100;
+  flex-wrap: wrap;
 }
 
 .logo-container {
@@ -73,6 +74,23 @@ body {
 
 .logo:hover {
   transform: scale(1.15);
+}
+
+/* Website Name Image */
+.website-name {
+  display: flex;
+  align-items: center;
+  margin: 0 1.5rem;
+}
+
+.title-logo {
+  height: 45px;
+  transition: all var(--transition-base);
+}
+
+.title-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px rgba(0, 173, 181, 0.5));
 }
 
 /* Hamburger Menu */
@@ -394,11 +412,20 @@ footer {
   .hero-content p {
     font-size: 1.2rem;
   }
+  
+  .website-name {
+    margin: 0 1rem;
+  }
+  
+  .title-logo {
+    height: 40px;
+  }
 }
 
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
+    justify-content: center;
   }
   
   .nav-links {
@@ -421,6 +448,10 @@ footer {
   
   .hamburger-menu {
     display: block;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   
   .hero-content h2 {
@@ -459,6 +490,33 @@ footer {
   .icon {
     font-size: 3rem;
   }
+  
+  .website-name {
+    margin: 0 0.5rem;
+  }
+  
+  .title-logo {
+    height: 35px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .logo-container, 
+  .website-name {
+    margin: 0;
+  }
+  
+  .hamburger-menu {
+    position: static;
+    transform: none;
+    margin-top: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -473,5 +531,9 @@ footer {
   .cta-button {
     padding: 0.8rem 1.8rem;
     font-size: 1rem;
+  }
+  
+  .title-logo {
+    height: 30px;
   }
 }
