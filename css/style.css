@@ -37,6 +37,7 @@ body {
   padding: 1rem 2rem;
   background-color: #1a1a1a;
   border-bottom: 1px solid #2c2c2c;
+  position: relative;
 }
 
 .logo-container {
@@ -46,18 +47,55 @@ body {
 }
 
 .logo {
-  height: 66px; /* Increased by 65% from 40px */
+  height: 66px;
   transition: transform 0.3s ease;
 }
 
 .logo:hover {
-  transform: scale(1.15); /* Increased from 1.05 to 1.15 */
+  transform: scale(1.15);
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger-icon {
+  width: 30px;
+  height: 21px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.4s ease;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--accent-color);
+  border-radius: 3px;
+  transition: all var(--transition-base);
+}
+
+.hamburger-icon.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger-icon.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-icon.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   gap: 1.5rem;
+  transition: transform 0.4s ease;
 }
 
 .nav-links a {
@@ -97,6 +135,9 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
 }
 
 .hero::before {
@@ -113,8 +154,23 @@ body {
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-illustration {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  opacity: 0.8;
+}
+
+.hero-illustration svg {
+  width: 100%;
+  height: auto;
 }
 
 .hero-content h2 {
@@ -127,6 +183,7 @@ body {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   color: #ccc;
+  max-width: 600px;
 }
 
 .cta-button {
@@ -180,7 +237,7 @@ body {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Changed to 3 columns for 2 rows */
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
@@ -198,7 +255,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 150px;
+  min-height: 200px;
 }
 
 .card::after {
@@ -223,6 +280,19 @@ body {
   transform: scaleX(1);
 }
 
+/* Category Icons */
+.icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.card:hover .icon {
+  transform: scale(1.2) rotate(5deg);
+  color: #fff;
+}
+
 /* Footer */
 footer {
   text-align: center;
@@ -237,15 +307,39 @@ footer {
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .card-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .hero-content {
+    padding: 0 1rem;
   }
 }
 
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
     padding: 1rem;
-    gap: 1rem;
+  }
+  
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #1a1a1a;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0 2rem;
+    gap: 1.5rem;
+    transform: translateY(-150%);
+    z-index: 100;
+  }
+  
+  .nav-links.active {
+    transform: translateY(0);
+  }
+  
+  .hamburger-menu {
+    display: block;
   }
   
   .hero-content h2 {
@@ -253,10 +347,19 @@ footer {
   }
   
   .card-grid {
-    grid-template-columns: 1fr; /* 1 column for small screens */
+    grid-template-columns: 1fr;
   }
   
   .logo {
-    height: 55px; /* Slightly smaller for mobile */
+    height: 55px;
+  }
+  
+  .hero {
+    min-height: 60vh;
+    padding: 2rem 1rem;
+  }
+  
+  .hero-illustration {
+    max-width: 300px;
   }
 }
