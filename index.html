@@ -6,6 +6,7 @@
   <meta name="description" content="Explore how everything around you works – from bottles to the space station. Dive into MECKANI." />
   <title>MECKANI - Explore the Craft</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
   <header>
@@ -15,6 +16,16 @@
           <img src="images/main-logo.png" alt="MECKANI Logo" class="logo">
         </a>
       </div>
+      
+      <!-- Hamburger Menu -->
+      <div class="hamburger-menu">
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -25,6 +36,17 @@
 
   <section class="hero">
     <div class="hero-content">
+      <!-- Hero SVG Illustration -->
+      <div class="hero-illustration">
+        <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100,150 Q250,50 400,150 L400,250 Q250,350 100,250 Z" fill="rgba(0,173,181,0.1)" stroke="var(--accent-color)" stroke-width="2" stroke-dasharray="8,4"/>
+          <circle cx="250" cy="200" r="60" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-dasharray="5,5"/>
+          <path d="M250,140 L250,260 M190,200 L310,200" stroke="var(--accent-color)" stroke-width="2"/>
+          <circle cx="150" cy="120" r="15" fill="var(--accent-color)" opacity="0.7"/>
+          <circle cx="350" cy="280" r="15" fill="var(--accent-color)" opacity="0.7"/>
+        </svg>
+      </div>
+      
       <h2>Explore the Craft</h2>
       <p>Dive into the mechanics of everything – from everyday objects to human-engineered wonders.</p>
       <a href="#" class="cta-button">Start Exploring</a>
@@ -34,12 +56,30 @@
   <section class="categories">
     <h3>Popular Categories</h3>
     <div class="card-grid">
-      <div class="card">Home Appliances</div>
-      <div class="card">Vehicles</div>
-      <div class="card">Electronics</div>
-      <div class="card">Tools</div>
-      <div class="card">Machines</div>
-      <div class="card">Space Tech</div>
+      <div class="card">
+        <i class="fas fa-blender icon"></i>
+        Home Appliances
+      </div>
+      <div class="card">
+        <i class="fas fa-car icon"></i>
+        Vehicles
+      </div>
+      <div class="card">
+        <i class="fas fa-laptop icon"></i>
+        Electronics
+      </div>
+      <div class="card">
+        <i class="fas fa-tools icon"></i>
+        Tools
+      </div>
+      <div class="card">
+        <i class="fas fa-cogs icon"></i>
+        Machines
+      </div>
+      <div class="card">
+        <i class="fas fa-rocket icon"></i>
+        Space Tech
+      </div>
     </div>
   </section>
 
@@ -57,6 +97,15 @@
       card.addEventListener('mouseleave', () => {
         card.style.zIndex = '1';
       });
+    });
+    
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger-icon');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('active');
     });
   </script>
 </body>
