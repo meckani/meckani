@@ -46,12 +46,12 @@ body {
 }
 
 .logo {
-  height: 40px;
+  height: 66px; /* Increased by 65% from 40px */
   transition: transform 0.3s ease;
 }
 
 .logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.15); /* Increased from 1.05 to 1.15 */
 }
 
 .nav-links {
@@ -180,7 +180,7 @@ body {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* Changed to 3 columns for 2 rows */
   gap: 1.5rem;
 }
 
@@ -235,6 +235,12 @@ footer {
 }
 
 /* Responsive adjustments */
+@media (max-width: 992px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+  }
+}
+
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -247,6 +253,10 @@ footer {
   }
   
   .card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: 1fr; /* 1 column for small screens */
+  }
+  
+  .logo {
+    height: 55px; /* Slightly smaller for mobile */
   }
 }
