@@ -14,20 +14,6 @@
     <div class="progress-bar"></div>
   </div>
   
-  <!-- Theme Toggle -->
-  <div class="theme-toggle">
-    <input type="checkbox" id="theme-switch" class="theme-switch" />
-    <label for="theme-switch" class="theme-label">
-      <i class="fas fa-sun"></i>
-      <i class="fas fa-moon"></i>
-      <span class="theme-ball"></span>
-    </label>
-  </div>
-  
-  <!-- Custom Cursor -->
-  <div class="cursor-dot"></div>
-  <div class="cursor-outline"></div>
-  
   <header>
     <nav class="navbar">
       <div class="logo-container">
@@ -57,7 +43,46 @@
     <!-- Hero SVG Illustration as background -->
     <div class="hero-illustration">
       <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
-        <!-- SVG content remains the same -->
+        <defs>
+          <linearGradient id="gearGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00adb5" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="#00adb5" stop-opacity="0.05" />
+          </linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+            <feFlood flood-color="#00adb5" flood-opacity="0.3" result="glowColor"/>
+            <feComposite in="glowColor" in2="blur" operator="in" result="glow"/>
+            <feMerge>
+              <feMergeNode in="glur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        
+        <!-- Background gears -->
+        <circle cx="200" cy="150" r="80" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-opacity="0.15" stroke-dasharray="8,4" filter="url(#glow)"/>
+        <circle cx="800" cy="450" r="100" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-opacity="0.15" stroke-dasharray="8,4" filter="url(#glow)"/>
+        <circle cx="600" cy="200" r="60" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-opacity="0.15" stroke-dasharray="8,4" filter="url(#glow)"/>
+        
+        <!-- Main gear -->
+        <g transform="translate(500,300)">
+          <circle r="120" fill="url(#gearGradient)" stroke="var(--accent-color)" stroke-width="2" stroke-opacity="0.2" />
+          <path d="M0,-120 L0,-150 M0,120 L0,150 M-120,0 L-150,0 M120,0 L150,0 
+                  M85,-85 L100,-100 M-85,85 L-100,100 M85,85 L100,100 M-85,-85 L-100,-100" 
+                stroke="var(--accent-color)" stroke-width="2" stroke-opacity="0.25" />
+          <circle r="40" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-opacity="0.25" />
+          
+          <!-- Inner gear details -->
+          <g transform="rotate(30)">
+            <rect x="-10" y="-40" width="20" height="80" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-opacity="0.25" />
+          </g>
+        </g>
+        
+        <!-- Floating particles -->
+        <circle cx="150" cy="450" r="8" fill="var(--accent-color)" opacity="0.15" />
+        <circle cx="900" cy="100" r="5" fill="var(--accent-color)" opacity="0.15" />
+        <circle cx="300" cy="500" r="6" fill="var(--accent-color)" opacity="0.15" />
+        <circle cx="700" cy="50" r="4" fill="var(--accent-color)" opacity="0.15" />
       </svg>
     </div>
     
@@ -143,29 +168,7 @@
       document.querySelector('.progress-bar').style.width = `${scrollPercentage}%`;
     });
     
-    // Theme toggle functionality
-    const themeSwitch = document.getElementById('theme-switch');
-    themeSwitch.addEventListener('change', () => {
-      document.body.classList.toggle('light-mode');
-      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-    });
-    
-    // Check for saved theme preference
-    if (localStorage.getItem('theme') === 'light') {
-      document.body.classList.add('light-mode');
-      themeSwitch.checked = true;
-    }
-    
-    // Custom cursor
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
-    
-    document.addEventListener('mousemove', (e) => {
-      cursorDot.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
-      cursorOutline.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
-    });
-    
-    // 3D card effect
+    // Enhanced 3D card effect
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -175,8 +178,9 @@
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         
-        const rotateY = (x - centerX) / 20;
-        const rotateX = (centerY - y) / 20;
+        // Increased rotation effect (from 20 to 15)
+        const rotateY = (x - centerX) / 15;
+        const rotateX = (centerY - y) / 15;
         
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
       });
