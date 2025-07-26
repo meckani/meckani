@@ -66,6 +66,13 @@
               <feMergeNode in="SourceGraphic"/>
             </feMerge>
           </filter>
+          
+          <!-- Spark filter for animation -->
+          <filter id="spark-glow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" result="glow" />
+            <feBlend in="SourceGraphic" in2="glow" mode="screen" />
+          </filter>
         </defs>
         
         <!-- Background gears -->
@@ -92,6 +99,27 @@
         <circle cx="900" cy="100" r="5" fill="var(--accent-color)" opacity="0.15" />
         <circle cx="300" cy="500" r="6" fill="var(--accent-color)" opacity="0.15" />
         <circle cx="700" cy="50" r="4" fill="var(--accent-color)" opacity="0.15" />
+        
+        <!-- Spark animation elements -->
+        <circle class="spark" cx="200" cy="150" r="85" fill="none" stroke="transparent" stroke-width="2" />
+        <circle class="spark" cx="800" cy="450" r="110" fill="none" stroke="transparent" stroke-width="2" />
+        
+        <!-- Spark elements -->
+        <circle class="spark-dot" cx="200" cy="235" r="3" fill="#fff" filter="url(#spark-glow)">
+          <animateMotion dur="4s" repeatCount="indefinite">
+            <mpath xlink:href="#spark-path-1" />
+          </animateMotion>
+        </circle>
+        
+        <circle class="spark-dot" cx="800" cy="560" r="3" fill="#fff" filter="url(#spark-glow)">
+          <animateMotion dur="4s" repeatCount="indefinite" begin="1s">
+            <mpath xlink:href="#spark-path-2" />
+          </animateMotion>
+        </circle>
+        
+        <!-- Hidden paths for spark animation -->
+        <path id="spark-path-1" d="M200,150 a85,85 0 1,1 0.1,0" fill="none" />
+        <path id="spark-path-2" d="M800,450 a110,110 0 1,1 0.1,0" fill="none" />
       </svg>
     </div>
     
