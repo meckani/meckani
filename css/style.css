@@ -83,7 +83,7 @@ body {
   margin: 0 auto; /* Center horizontally */
   position: absolute;
   left: 50%;
-  transform: translate(calc(-50% + 60px), -50%); /* Combined transform */
+  transform: translate(calc(-50% + 40px), -50%); /* Combined transform */
   top: 50%;
 }
 
